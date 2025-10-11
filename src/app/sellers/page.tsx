@@ -1,31 +1,33 @@
+// src/app/sellers/page.tsx
+
+"use client";
+
 import styles from "../page.module.css";
+import { sellers } from "@/data/sellers";
+import SellerCard from "@/components/SellerCard";
 
-export default function Sellers() {
+export default function SellersPage() {
   return (
-    <div>
+    <main style={{ maxWidth: "1200px", margin: "2rem auto", padding: "0 1rem" }}>
+      <h2 className={styles.sectionTitle}>Our Sellers</h2>
+      <p className={styles.sectionSubtitle}>
+        Meet the talented artisans bringing creativity to life across Africa.
+      </p>
 
-      <main style={{ maxWidth: "1200px", margin: "2rem auto", padding: "0 1rem" }}>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", marginBottom: "2rem" }}>
-          Our Sellers
-        </h2>
+      {/* Seller Grid */}
+      <div className={styles.productGrid}>
+        {sellers.map((seller) => (
+          <SellerCard key={seller.id} seller={seller} />
+        ))}
+      </div>
 
-        {/* Seller grid */}
-        <div className={styles.productGrid}>
-          {["Alice – Jewelry", "Ben – Pottery", "Carmen – Textiles", "Diego – Woodwork"].map((seller, i) => (
-            <div key={i} className={styles.productCard}>
-              <div style={{ height: "100px", width: "100px", background: "#ccc", borderRadius: "50%", margin: "0 auto 1rem" }} />
-              <h4>{seller.split(" – ")[0]}</h4>
-              <p>{seller.split(" – ")[1]}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
-          <button className={styles.buttonPrimary}>Become a Seller</button>
-        </div>
-      </main>
-
-    </div>
+      {/* CTA Section */}
+      <div style={{ textAlign: "center", marginTop: "3rem" }}>
+        <p style={{ marginBottom: "1rem", color: "#555" }}>
+          Are you a craftsman, artist, or creative seller?
+        </p>
+        <button className={styles.buttonPrimary}>Become a Seller</button>
+      </div>
+    </main>
   );
 }

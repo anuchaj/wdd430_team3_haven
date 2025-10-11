@@ -1,38 +1,62 @@
+// src/app/shop/page.tsx
+"use client";
+
+import { useState } from "react";
 import styles from "../page.module.css";
+import ProductCard from "@/components/ProductCard";
+import { products } from "@/data/products";
 
-export default function Shop() {
+export default function ShopPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  // Filter products by selected category
+  const filteredProducts =
+    selectedCategory === ""
+      ? products
+      : products.filter(
+          (product) => product.category === selectedCategory
+        );
+
   return (
-    <div>
+    <div className={styles.productsSection}>
+      <h2 className={styles.sectionTitle}>Shop All Products</h2>
+      <p className={styles.sectionSubtitle}>
+        Discover handmade treasures crafted with love.
+      </p>
 
-      <main style={{ maxWidth: "1200px", margin: "2rem auto", padding: "0 1rem" }}>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", marginBottom: "1rem" }}>
-          Shop Products
-        </h2>
+      {/* --- Filter Dropdown --- */}
+      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          style={{
+            padding: "0.5rem 1rem",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+          }}
+        >
+          <option value="">All Categories</option>
+          <option value="Home Decor">Home Decor</option>
+          <option value="Kitchenware">Kitchenware</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Art">Art</option>
+          <option value="Jewelry">Jewelry</option>
+        </select>
+      </div>
 
-        {/* Filter placeholder */}
-        <div style={{ marginBottom: "2rem" }}>
-          <label style={{ marginRight: "1rem" }}>Filter by Category:</label>
-          <select>
-            <option>All</option>
-            <option>Jewelry</option>
-            <option>Home Decor</option>
-            <option>Clothing</option>
-          </select>
-        </div>
-
-        {/* Product grid */}
-        <div className={styles.productGrid}>
-          {[40, 60, 25, 80].map((price, i) => (
-            <div key={i} className={styles.productCard}>
-              <div style={{ height: "150px", background: "#eee", borderRadius: "8px", marginBottom: "1rem" }} />
-              <h4>Product {i + 1}</h4>
-              <p>${price}.00</p>
-              <button className={styles.buttonPrimary}>Add to Cart</button>
-            </div>
-          ))}
-        </div>
+      {/* --- Product Grid --- */}
+      <main className={styles.productGrid}>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p style={{ textAlign: "center", color: "#777" }}>
+            No products found in this category.
+          </p>
+        )}
       </main>
-
     </div>
   );
 }
