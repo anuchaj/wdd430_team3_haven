@@ -163,7 +163,3 @@ Description: Include metadata, alt text, semantic HTML.
 
 ---
 
-## Next Steps
-- Continue refining design and wireframes.  
-- Start implementing basic components.  
-- Prepare for next group meeting and select a new group leader.  

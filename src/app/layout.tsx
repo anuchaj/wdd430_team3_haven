@@ -1,38 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import styles from "./page.module.css";
+"use client";
 
+import "@/styles/globals.css";
+import { SessionProvider } from "next-auth/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import styles from "./page.module.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Handcrafted Haven",
-  description: "Support artisans by shopping unique handmade products",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {/* {children} */}
-        <Header />
-        <main className={styles.productsSection}>{children}</main>
-        <Footer />
+      <body>
+        <SessionProvider>
+          <Header />
+          <main className={styles.productsSection}>{children}</main>
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );

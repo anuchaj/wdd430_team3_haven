@@ -1,29 +1,38 @@
 "use client";
 
-// import Link from "next/link";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import styles from "../app/page.module.css";
 
 export default function Header() {
+  const { data: session } = useSession();
+
   return (
     <header className={styles.header}>
-        <h1
-          style={{
-            color: "var(--color-primary)",
-            fontFamily: "'Playfair Display', serif",
-          }}
-        >
-          <a href="/">Handcrafted Haven</a>
-        </h1>
-        <nav className={styles.nav}>
-          <a href="/">Home</a>
-          <a href="/shop">Shop</a>
-          <a href="/sellers">Sellers</a>
-          <a href="/about">About</a>
-        </nav>
-        <div>
-          <button className={styles.buttonPrimary}>Login</button>
-          <button className={styles.buttonSecondary}>Cart</button>
-        </div>
-      </header>
+      <Link href="/"><h1>Handcrafted Haven</h1></Link>
+      <nav className={styles.nav}>
+        <Link href="/">Home</Link>
+        <Link href="/shop">Shop</Link>
+        <Link href="/sellers">Sellers</Link>
+        <Link href="/about">About</Link>
+        <Link href="/contact">Contact</Link>
+        <Link href="/cart">Cart</Link>
+
+        {session ? (
+          <>
+            <Link href="/dashboard/profile">My Account</Link>
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className={styles.buttonSecondary}
+              style={{ marginLeft: "1rem" }}
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link href="/auth/login">Login</Link>
+        )}
+      </nav>
+    </header>
   );
 }
