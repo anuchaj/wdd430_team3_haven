@@ -6,6 +6,7 @@ export interface Product {
   price: number;
   image: string;
   category: string;
+  description: string;
   seller: string;
 }
 
@@ -16,6 +17,7 @@ export const products: Product[] = [
     price: 45,
     image: "/images/basket.jpg",
     category: "Home Decor",
+    description: " ",
     seller: "Ada Crafts",
   },
   {
@@ -24,6 +26,7 @@ export const products: Product[] = [
     price: 35,
     image: "/images/clay-pot.jpg",
     category: "Kitchenware",
+    description: " ",
     seller: "Obi Pottery",
   },
   {
@@ -32,6 +35,7 @@ export const products: Product[] = [
     price: 50,
     image: "/images/wallet.jpg",
     category: "Accessories",
+    description: " ",
     seller: "Tunde Leatherworks",
   },
   {
@@ -40,6 +44,7 @@ export const products: Product[] = [
     price: 120,
     image: "/images/sculpture.jpg",
     category: "Art",
+    description: " ",
     seller: "Chika Woodworks",
   },
   {
@@ -48,6 +53,7 @@ export const products: Product[] = [
     price: 25,
     image: "/images/necklace.jpg",
     category: "Jewelry",
+    description: " ",
     seller: "Ngozi Beads",
   },
 ];
