@@ -1,0 +1,23 @@
+
+[
+  {
+    "name": "Amina Crafts",
+    "email": "amina@crafts.com",
+    "password": "12345678",
+    "accountType": "seller",
+    "location": "Lagos",
+    "bio": "My Bio",
+    "image": ""
+  },
+  {
+    "name": "Cammi Crafts",
+    "email": "cammi@crafts.com",
+    "password": "12345678",
+    "accountType": "user",
+    "location": "Lagos",
+    "bio": "My Bio",
+    "image": ""
+  }
+ 
+]
+

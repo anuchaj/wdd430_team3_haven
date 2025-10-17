@@ -1,3 +1,4 @@
+// eslint.config.mjs
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -20,12 +21,6 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-  {
-    eslint: {
-    ignoreDuringBuilds: true,
-  },
-  },
-  
 ];
 
 export default eslintConfig;

@@ -1,24 +1,52 @@
+// /dashboard/products/page.tsx
 "use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { products as defaultProducts } from "@/data/products";
-import { saveToStorage, getFromStorage } from "@/utils/storage";
 import styles from "./page.module.css";
 
+interface Product {
+  _id: string;
+  name: string;
+  description?: string;
+  price: number;
+  image?: string;
+}
+
 export default function ProductsPage() {
-  const [products, setProducts] = useState(defaultProducts);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const saved = getFromStorage("sellerProducts", defaultProducts);
-    setProducts(saved);
+    async function fetchProducts() {
+      try {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
   }, []);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
-    const filtered = products.filter((p) => p.id !== id);
-    setProducts(filtered);
-    saveToStorage("sellerProducts", filtered);
+    try {
+      const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        setProducts((prev) => prev.filter((p) => p._id !== id));
+      } else {
+        alert("Failed to delete product.");
+      }
+    } catch (error) {
+      console.error("Delete failed:", error);
+    }
   };
+
+  if (loading) return <p className={styles.container}>Loading...</p>;
 
   return (
     <div className={styles.container}>
@@ -34,15 +62,15 @@ export default function ProductsPage() {
       ) : (
         <div className={styles.grid}>
           {products.map((p) => (
-            <div key={p.id} className={styles.card}>
-              <img src={p.image} alt={p.name} className={styles.image} />
+            <div key={p._id} className={styles.card}>
+              <img src={p.image || "/placeholder.jpg"} alt={p.name} className={styles.image} />
               <h3 className={styles.name}>{p.name}</h3>
               <p className={styles.price}>${p.price}</p>
               <div className={styles.actions}>
-                <Link href={`/dashboard/products/${p.id}/edit`} className={styles.edit}>
+                <Link href={`/dashboard/products/${p._id}/edit`} className={styles.edit}>
                   Edit
                 </Link>
-                <button onClick={() => handleDelete(p.id)} className={styles.delete}>
+                <button onClick={() => handleDelete(p._id)} className={styles.delete}>
                   Delete
                 </button>
               </div>

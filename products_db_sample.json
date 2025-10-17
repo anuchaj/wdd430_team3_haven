@@ -1,0 +1,45 @@
+
+[
+  {
+    "name": "Handwoven Basket",
+    "description": "Info about the product",
+    "price": 45,
+    "image": "/images/basket.jpg",
+    "category": "Home Decor",
+    "sellerId": "Ada Crafts"
+  },
+  {
+    "name": "Clay Pot",
+    "description": "Info about the product",
+    "price": 35,
+    "image": "/images/clay-pot.jpg",
+    "category": "Kitchenware",
+    "sellerId": "Obi Pottery"
+  },
+  {
+    "name": "Leather Wallet",
+    "description": "Info about the product",
+    "price": 50,
+    "image": "/images/wallet.jpg",
+    "category": "Accessories",
+    "sellerId": "Tunde Leatherworks"
+  },
+  {
+    "name": "Wooden Sculpture",
+    "description": "Info about the product",
+    "price": 120,
+    "image": "/images/sculpture.jpg",
+    "category": "Art",
+    "sellerId": "Chika Woodworks"
+  },
+  {
+    "name": "Beaded Necklace",
+    "description": "Info about the product",
+    "price": 25,
+    "image": "/images/necklace.jpg",
+    "category": "Jewelry",
+    "sellerId": "Ngozi Beads"
+  }
+ 
+]
+
